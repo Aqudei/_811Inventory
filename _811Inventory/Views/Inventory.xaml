@@ -30,14 +30,18 @@
                 <Button Content="Delete"
                         Width="100"
                         Command="{Binding DeleteItemsCommand}" />
+                <Button Content="Print"
+                        Width="100"
+                        Command="{Binding PrintQrCommand}" />
             </StackPanel>
             <TextBox Grid.Column="1"
-                     Text="{Binding SearchText}"
+                     Text="{Binding SearchText, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
                      mah:TextBoxHelper.Watermark="Search"/>
 
         </Grid>
 
         <DataGrid ItemsSource="{Binding Items}"
+                  Language="fil-PH"
                   AutoGenerateColumns="False"
                   IsReadOnly="True"
                   FontSize="20"
@@ -47,12 +51,12 @@
                 <DataGridTemplateColumn >
                     <DataGridTemplateColumn.HeaderTemplate>
                         <DataTemplate>
-                            <CheckBox IsChecked="{Binding DataContext.IsAllSelected, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type DataGrid}}}" />
+                            <CheckBox IsChecked="{Binding DataContext.IsAllSelected, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type DataGrid}}}" />
                         </DataTemplate>
                     </DataGridTemplateColumn.HeaderTemplate>
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
-                            <CheckBox IsChecked="{Binding IsSelected}"
+                            <CheckBox IsChecked="{Binding IsSelected, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                                       HorizontalAlignment="Center"/>
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
@@ -65,7 +69,8 @@
                         </Style>
                     </DataGridTextColumn.ElementStyle>
                 </DataGridTextColumn>
-                <DataGridTextColumn Width="*" Header="Value" Binding="{Binding UnitValue}"/>
+                <DataGridTextColumn Width="*" Header="Value" Binding="{Binding UnitValue, StringFormat=C}"/>
+                
                 <DataGridTextColumn Width="*" Header="Condition" Binding="{Binding Condition}"/>
                 <DataGridTextColumn Width="2*" 
                                     Header="Remarks" 
