@@ -2,6 +2,7 @@
 using ClosedXML.Excel;
 using Prism.Commands;
 using Prism.Regions;
+using Prism.Services.Dialogs;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Drawing;
@@ -35,6 +36,20 @@ namespace _811Inventory.ViewModels
             }
         }
 
+        private DelegateCommand<InventoryItem> _editCommand;
+
+        public DelegateCommand<InventoryItem> EditCommand
+        {
+            get { return _editCommand ??= new DelegateCommand<InventoryItem>(OnEditItem); }
+        }
+
+        private void OnEditItem(InventoryItem item)
+        {
+            if (item == null) return;
+
+            _regionManager.RequestNavigate("SideRegion", "ItemCrud", new NavigationParameters { { "InventoryItem", item } });
+        }
+
         private ObservableCollection<InventoryItem> _items = [];
         public ICollectionView Items { get; set; }
 
@@ -49,6 +64,8 @@ namespace _811Inventory.ViewModels
         private DelegateCommand _PrintQrCommand;
         private InventoryItem[] _selectedForPrinting;
         private int _currentIndex;
+        private readonly IDialogService _dialogService;
+        private readonly IRegionManager _regionManager;
 
         public DelegateCommand PrintQrCommand
         {
@@ -220,17 +237,7 @@ namespace _811Inventory.ViewModels
             }
         }
 
-        public InventoryViewModel()
-        {
-            AppDataPath = System.IO.Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "_811Inventory");
-            Directory.CreateDirectory(AppDataPath);
-            DbPath = System.IO.Path.Combine(AppDataPath, "_811Inventory.data");
 
-            Items = CollectionViewSource.GetDefaultView(_items);
-
-
-            PropertyChanged += InventoryViewModel_PropertyChanged;
-        }
 
         private void InventoryViewModel_PropertyChanged(object? sender, PropertyChangedEventArgs e)
         {
@@ -289,6 +296,22 @@ namespace _811Inventory.ViewModels
             {
                 db.GetCollection<InventoryItem>().Insert(item);
             }
+        }
+
+
+        public InventoryViewModel(IDialogService dialogService, IRegionManager regionManager)
+        {
+            AppDataPath = System.IO.Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "_811Inventory");
+            Directory.CreateDirectory(AppDataPath);
+            DbPath = System.IO.Path.Combine(AppDataPath, "_811Inventory.data");
+
+            Items = CollectionViewSource.GetDefaultView(_items);
+
+
+            PropertyChanged += InventoryViewModel_PropertyChanged;
+
+            _dialogService = dialogService;
+            _regionManager = regionManager;
         }
     }
 }

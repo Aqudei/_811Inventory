@@ -10,6 +10,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Documents;
 
 namespace _811Inventory.ViewModels
 {
@@ -63,7 +64,14 @@ namespace _811Inventory.ViewModels
                 NavigationDestination = "Inventory"
 
             });
+            Menu.Add(new MyMenuItem
+            {
+                Icon = new PackIconFontAwesome() { Kind = PackIconFontAwesomeKind.ToolboxSolid },
+                Label = "Scan",
+                NavigationType = typeof(Scan),
+                NavigationDestination = "Scan"
 
+            });
             Menu.Add(new MyMenuItem
             {
                 Icon = new PackIconFontAwesome() { Kind = PackIconFontAwesomeKind.ToolboxSolid },

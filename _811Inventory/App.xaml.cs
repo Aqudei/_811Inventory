@@ -1,4 +1,7 @@
-﻿using _811Inventory.Views;
+﻿using _811Inventory.Models;
+using _811Inventory.ViewModels;
+using _811Inventory.Views;
+using AutoMapper;
 using Prism.Ioc;
 using Prism.Unity;
 using System.Configuration;
@@ -21,6 +24,17 @@ public partial class App : PrismApplication
     {
         containerRegistry.RegisterForNavigation<Settings>();
         containerRegistry.RegisterForNavigation<Inventory>();
+        containerRegistry.RegisterForNavigation<ItemCrud>();
+
+        containerRegistry.RegisterDialogWindow<MetroDialogWindow>();
+        containerRegistry.RegisterDialog<ItemCrud>();
+
+        var config = new MapperConfiguration(cfg => {
+            cfg.CreateMap<InventoryItem, ItemCrudViewModel>().ReverseMap();
+        });
+
+        containerRegistry.RegisterInstance(config.CreateMapper());
+
     }
 }
 

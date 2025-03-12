@@ -1,0 +1,88 @@
+﻿<UserControl x:Class="_811Inventory.Views.ItemCrud"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:_811Inventory.Views"
+             mc:Ignorable="d" 
+             d:DesignHeight="592" d:DesignWidth="802">
+    <Grid Margin="20">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <TextBlock Text="Article Information" 
+                   FontSize="20" 
+                   FontWeight="Bold" 
+                   HorizontalAlignment="Center"
+                   Margin="0,0,0,20"/>
+
+        <!-- Main Form Layout -->
+        <Grid Grid.Row="1" Margin="0,10,0,10">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+
+            <StackPanel Grid.Column="0" Orientation="Vertical" VerticalAlignment="Top">
+                <TextBlock Text="ID:" Margin="0,5"/>
+                <TextBlock Text="Article Name:" Margin="0,5"/>
+                <TextBlock Text="Description:" Margin="0,5"/>
+                <TextBlock Text="Old Property No:" Margin="0,5"/>
+                <TextBlock Text="New Property No:" Margin="0,5"/>
+                <TextBlock Text="Unit of Measurement:" Margin="0,5"/>
+                <TextBlock Text="Unit Value:" Margin="0,5"/>
+                <TextBlock Text="Quantity Per Property Card:" Margin="0,5"/>
+                <TextBlock Text="Quantity Per Physical Count:" Margin="0,5"/>
+                <TextBlock Text="Location:" Margin="0,5"/>
+                <TextBlock Text="Condition:" Margin="0,5"/>
+                <TextBlock Text="Remarks:" Margin="0,5"/>
+            </StackPanel>
+
+            <StackPanel Grid.Column="1" Orientation="Vertical" VerticalAlignment="Top">
+                <TextBox Text="{Binding Id, Mode=TwoWay}" IsReadOnly="True" Margin="0,2" Padding="5"/>
+                <TextBox Text="{Binding ArticleName, Mode=TwoWay}" Margin="0,2" Padding="5"/>
+                <TextBox Text="{Binding Description, Mode=TwoWay}" Margin="0,2" Padding="5"/>
+                <TextBox Text="{Binding OldPropertyNo, Mode=TwoWay}" Margin="0,2" Padding="5"/>
+                <TextBox Text="{Binding NewPropertyNo, Mode=TwoWay}" Margin="0,2" Padding="5"/>
+
+                <ComboBox SelectedItem="{Binding UnitOfMeasurement, Mode=TwoWay}" Margin="0,2" Padding="5">
+                    <ComboBoxItem Content="Piece"/>
+                    <ComboBoxItem Content="Box"/>
+                    <ComboBoxItem Content="Kilogram"/>
+                </ComboBox>
+
+                <TextBox Text="{Binding UnitValue, Mode=TwoWay}" Margin="0,2" Padding="5"/>
+                <TextBox Text="{Binding QuantityPerPropertyCard, Mode=TwoWay}" Margin="0,2" Padding="5"/>
+                <TextBox Text="{Binding QuantityPerPhysicalCount, Mode=TwoWay}" Margin="0,2" Padding="5"/>
+                <TextBox Text="{Binding Location, Mode=TwoWay}" Margin="0,2" Padding="5"/>
+
+                <ComboBox SelectedItem="{Binding Condition, Mode=TwoWay}" Margin="0,2" Padding="5">
+                    <ComboBoxItem Content="New"/>
+                    <ComboBoxItem Content="Used"/>
+                    <ComboBoxItem Content="Damaged"/>
+                </ComboBox>
+
+                <TextBox Text="{Binding Remarks, Mode=TwoWay}" Margin="0,2" Padding="5"/>
+            </StackPanel>
+        </Grid>
+
+        <!-- Save Button -->
+        <Button Grid.Row="2" 
+                Content="Save" 
+                Command="{Binding SaveCommand}" 
+                HorizontalAlignment="Right" 
+                Padding="10,5" 
+                Margin="10"/>
+
+        <!-- Close Button -->
+        <Button Grid.Row="2" 
+                Content="Close" 
+                Command="{Binding CloseCommand}" 
+                HorizontalAlignment="Left" 
+                Padding="10,5" 
+                Margin="10"/>
+    </Grid>
+</UserControl>

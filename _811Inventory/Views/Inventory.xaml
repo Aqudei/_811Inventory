@@ -4,6 +4,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:mah="http://metro.mahapps.com/winfx/xaml/controls"
+             xmlns:prism="http://prismlibrary.com/"
              xmlns:local="clr-namespace:_811Inventory.Views"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
@@ -15,6 +16,11 @@
             <RowDefinition/>
         </Grid.RowDefinitions>
 
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition Width="Auto"/>
+        </Grid.ColumnDefinitions>
+
         <Grid>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition/>
@@ -23,30 +29,39 @@
             <StackPanel Orientation="Horizontal">
                 <Button Content="Import"
                         Width="100"
-                        Command="{Binding ImportCommand}" />
+                        Command="{Binding ImportCommand}" Margin="2,2,2,2" />
                 <Button Content="New"
                         Width="100"
-                        Command="{Binding NewItemCommand}" />
+                        Command="{Binding NewItemCommand}" Margin="2,2,2,2" />
                 <Button Content="Delete"
                         Width="100"
-                        Command="{Binding DeleteItemsCommand}" />
+                        Command="{Binding DeleteItemsCommand}" Margin="2,2,2,2" />
                 <Button Content="Print"
                         Width="100"
-                        Command="{Binding PrintQrCommand}" />
+                        Command="{Binding PrintQrCommand}" Margin="2,2,2,2" />
+
+                <Button Content="Edit"
+                        Margin="2"
+                        Width="100"
+                        Command="{Binding EditCommand}" 
+                        CommandParameter="{Binding SelectedItem, ElementName=InventoryDataGrid}"/>
             </StackPanel>
             <TextBox Grid.Column="1"
                      Text="{Binding SearchText, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"
-                     mah:TextBoxHelper.Watermark="Search"/>
+                     mah:TextBoxHelper.Watermark="Search" 
+                     mah:TextBoxHelper.ClearTextButton="True"
+                     Margin="2,2,2,2"/>
 
         </Grid>
 
         <DataGrid ItemsSource="{Binding Items}"
+                  x:Name="InventoryDataGrid"
                   Language="fil-PH"
                   AutoGenerateColumns="False"
                   IsReadOnly="True"
                   FontSize="20"
                   RowHeight="90"
-                  Grid.Row="1">
+                  Grid.Row="1" Margin="2,2,2,2">
             <DataGrid.Columns>
                 <DataGridTemplateColumn >
                     <DataGridTemplateColumn.HeaderTemplate>
@@ -70,7 +85,7 @@
                     </DataGridTextColumn.ElementStyle>
                 </DataGridTextColumn>
                 <DataGridTextColumn Width="*" Header="Value" Binding="{Binding UnitValue, StringFormat=C}"/>
-                
+
                 <DataGridTextColumn Width="*" Header="Condition" Binding="{Binding Condition}"/>
                 <DataGridTextColumn Width="2*" 
                                     Header="Remarks" 
@@ -83,5 +98,10 @@
                 </DataGridTextColumn>
             </DataGrid.Columns>
         </DataGrid>
+
+        <Grid Grid.Column="1"
+              Grid.RowSpan="2">
+            <mah:TransitioningContentControl prism:RegionManager.RegionName="SideRegion"/>
+        </Grid>
     </Grid>
 </UserControl>
