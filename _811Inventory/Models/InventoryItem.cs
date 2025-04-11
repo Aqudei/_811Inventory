@@ -26,5 +26,6 @@ namespace _811Inventory.Models
         public string? Location { get; set; }
         public string? Condition { get; set; }
         public string? Remarks { get; set; }
+        public List<string> Images { get; set; } = [];
     }
 }

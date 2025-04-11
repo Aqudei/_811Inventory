@@ -50,6 +50,7 @@ namespace _811Inventory.ViewModels
         }
 
         private ObservableCollection<InventoryItem> _items = [];
+        public InventoryItem SelectedItem { get => _selectedItem; set => SetProperty(ref _selectedItem, value); }
         public ICollectionView Items { get; set; }
 
         private string _searchText;
@@ -63,8 +64,21 @@ namespace _811Inventory.ViewModels
         private DelegateCommand _PrintQrCommand;
         private InventoryItem[] _selectedForPrinting;
         private int _currentIndex;
+        private InventoryItem _selectedItem;
         private readonly IDialogService _dialogService;
         private readonly IRegionManager _regionManager;
+        private readonly IRegionNavigationService _regionNavigationService;
+        private DelegateCommand _newItemCommand;
+
+        public DelegateCommand NewItemCommand
+        {
+            get { return _newItemCommand ??= new DelegateCommand(OnNewItem); }
+        }
+
+        private void OnNewItem()
+        {
+            _regionManager.RequestNavigate(Variables.REGION_SIDE, "ItemCrud");
+        }
 
         public DelegateCommand PrintQrCommand
         {
@@ -259,6 +273,12 @@ namespace _811Inventory.ViewModels
                         Items.Filter = null;
                     }
                     break;
+                case nameof(SelectedItem):
+                    if (SelectedItem != null)
+                        _regionManager.RequestNavigate("SideRegion", "ItemDetailView", new NavigationParameters { { "InventoryItem", SelectedItem } });
+                    else
+                        _regionManager.Regions["SideRegion"].RemoveAll();
+                    break;
                 default:
                     break;
             }
@@ -298,9 +318,9 @@ namespace _811Inventory.ViewModels
         }
 
 
-        public InventoryViewModel(IDialogService dialogService, IRegionManager regionManager)
+        public InventoryViewModel(IDialogService dialogService, IRegionManager regionManager, IRegionNavigationService regionNavigationService)
         {
-           
+
 
             Items = CollectionViewSource.GetDefaultView(_items);
 
@@ -309,6 +329,7 @@ namespace _811Inventory.ViewModels
 
             _dialogService = dialogService;
             _regionManager = regionManager;
+            _regionNavigationService = regionNavigationService;
         }
     }
 }

@@ -13,7 +13,7 @@ using System.Threading.Tasks;
 
 namespace _811Inventory.ViewModels
 {
-    class ItemCrudViewModel : PageBase
+    class ItemCrudViewModel : PageBase, INavigationAware
     {
         private readonly IMapper _mapper;
         private readonly IRegionManager _regionManager;

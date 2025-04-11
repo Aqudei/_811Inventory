@@ -25,12 +25,15 @@ public partial class App : PrismApplication
         containerRegistry.RegisterForNavigation<Settings>();
         containerRegistry.RegisterForNavigation<Inventory>();
         containerRegistry.RegisterForNavigation<ItemCrud>();
+        containerRegistry.RegisterForNavigation<ItemDetailView>();
 
         containerRegistry.RegisterDialogWindow<MetroDialogWindow>();
         containerRegistry.RegisterDialog<ItemCrud>();
 
-        var config = new MapperConfiguration(cfg => {
+        var config = new MapperConfiguration(cfg =>
+        {
             cfg.CreateMap<InventoryItem, ItemCrudViewModel>().ReverseMap();
+            cfg.CreateMap<InventoryItem, ItemDetailViewModel>().ReverseMap();
         });
 
         containerRegistry.RegisterInstance(config.CreateMapper());

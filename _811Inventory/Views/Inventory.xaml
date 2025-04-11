@@ -55,6 +55,7 @@
         </Grid>
 
         <DataGrid ItemsSource="{Binding Items}"
+                  SelectedItem="{Binding SelectedItem, Mode=OneWayToSource}"
                   x:Name="InventoryDataGrid"
                   Language="fil-PH"
                   AutoGenerateColumns="False"
@@ -84,11 +85,11 @@
                         </Style>
                     </DataGridTextColumn.ElementStyle>
                 </DataGridTextColumn>
-                <DataGridTextColumn Width="*" Header="Value" Binding="{Binding UnitValue, StringFormat=C}"/>
+                <!--<DataGridTextColumn Width="*" Header="Value" Binding="{Binding UnitValue, StringFormat=C}"/>-->
 
                 <DataGridTextColumn Width="*" Header="Condition" Binding="{Binding Condition}"/>
                 <DataGridTextColumn Width="*" Header="Location" Binding="{Binding Location}"/>
-                <DataGridTextColumn Width="2*" 
+                <!--<DataGridTextColumn Width="2*" 
                                     Header="Remarks" 
                                     Binding="{Binding Remarks}">
                     <DataGridTextColumn.ElementStyle>
@@ -96,7 +97,7 @@
                             <Setter Property="TextWrapping" Value="Wrap"/>
                         </Style>
                     </DataGridTextColumn.ElementStyle>
-                </DataGridTextColumn>
+                </DataGridTextColumn>-->
             </DataGrid.Columns>
         </DataGrid>
 
