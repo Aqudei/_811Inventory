@@ -18,8 +18,7 @@ namespace _811Inventory.ViewModels
     class InventoryViewModel : PageBase
     {
         private DelegateCommand _importCommand;
-        private string AppDataPath;
-        private string DbPath;
+
         private bool _isAllSelected;
 
         public bool IsAllSelected
@@ -301,9 +300,7 @@ namespace _811Inventory.ViewModels
 
         public InventoryViewModel(IDialogService dialogService, IRegionManager regionManager)
         {
-            AppDataPath = System.IO.Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "_811Inventory");
-            Directory.CreateDirectory(AppDataPath);
-            DbPath = System.IO.Path.Combine(AppDataPath, "_811Inventory.data");
+           
 
             Items = CollectionViewSource.GetDefaultView(_items);
 

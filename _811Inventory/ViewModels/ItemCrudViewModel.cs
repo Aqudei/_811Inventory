@@ -1,10 +1,12 @@
 ﻿using _811Inventory.Models;
 using AutoMapper;
+using LiteDB;
 using Prism.Commands;
 using Prism.Regions;
 using Prism.Services.Dialogs;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -28,6 +30,7 @@ namespace _811Inventory.ViewModels
         private string? _condition;
         private string? _remarks;
 
+        public ObservableCollection<string?> Conditions => new ObservableCollection<string?>();
         public int Id
         {
             get => _id;
@@ -102,6 +105,13 @@ namespace _811Inventory.ViewModels
 
         public override void OnNavigatedTo(NavigationContext navigationContext)
         {
+            using var db = new LiteDatabase(DbPath);
+            var conditions = db.GetCollection<InventoryItem>()
+                .FindAll().Select(i => i.Condition).Distinct().ToArray();
+            
+            Conditions.Clear();
+            Conditions.AddRange(conditions);
+
             if (navigationContext.Parameters.TryGetValue<InventoryItem>("InventoryItem", out var item))
             {
                 // Edit
@@ -114,7 +124,6 @@ namespace _811Inventory.ViewModels
         }
 
         private DelegateCommand _CloseCommand;
-
         public DelegateCommand CloseCommand
         {
             get { return _CloseCommand ??= new DelegateCommand(OnClose); }

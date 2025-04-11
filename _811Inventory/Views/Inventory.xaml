@@ -87,6 +87,7 @@
                 <DataGridTextColumn Width="*" Header="Value" Binding="{Binding UnitValue, StringFormat=C}"/>
 
                 <DataGridTextColumn Width="*" Header="Condition" Binding="{Binding Condition}"/>
+                <DataGridTextColumn Width="*" Header="Location" Binding="{Binding Location}"/>
                 <DataGridTextColumn Width="2*" 
                                     Header="Remarks" 
                                     Binding="{Binding Remarks}">

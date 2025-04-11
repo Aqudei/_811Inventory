@@ -14,75 +14,85 @@
         </Grid.RowDefinitions>
 
         <TextBlock Text="Article Information" 
-                   FontSize="20" 
-                   FontWeight="Bold" 
-                   HorizontalAlignment="Center"
-                   Margin="0,0,0,20"/>
+               FontSize="20" 
+               FontWeight="Bold" 
+               HorizontalAlignment="Center"
+               Margin="0,0,0,20"/>
 
         <!-- Main Form Layout -->
         <Grid Grid.Row="1" Margin="0,10,0,10">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="Auto"/>
-                <ColumnDefinition Width="*"/>
+                <ColumnDefinition />
             </Grid.ColumnDefinitions>
 
-            <StackPanel Grid.Column="0" Orientation="Vertical" VerticalAlignment="Top">
-                <TextBlock Text="ID:" Margin="0,5"/>
-                <TextBlock Text="Article Name:" Margin="0,5"/>
-                <TextBlock Text="Description:" Margin="0,5"/>
-                <TextBlock Text="Old Property No:" Margin="0,5"/>
-                <TextBlock Text="New Property No:" Margin="0,5"/>
-                <TextBlock Text="Unit of Measurement:" Margin="0,5"/>
-                <TextBlock Text="Unit Value:" Margin="0,5"/>
-                <TextBlock Text="Quantity Per Property Card:" Margin="0,5"/>
-                <TextBlock Text="Quantity Per Physical Count:" Margin="0,5"/>
-                <TextBlock Text="Location:" Margin="0,5"/>
-                <TextBlock Text="Condition:" Margin="0,5"/>
-                <TextBlock Text="Remarks:" Margin="0,5"/>
-            </StackPanel>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
 
-            <StackPanel Grid.Column="1" Orientation="Vertical" VerticalAlignment="Top">
-                <TextBox Text="{Binding Id, Mode=TwoWay}" IsReadOnly="True" Margin="0,2" Padding="5"/>
-                <TextBox Text="{Binding ArticleName, Mode=TwoWay}" Margin="0,2" Padding="5"/>
-                <TextBox Text="{Binding Description, Mode=TwoWay}" Margin="0,2" Padding="5"/>
-                <TextBox Text="{Binding OldPropertyNo, Mode=TwoWay}" Margin="0,2" Padding="5"/>
-                <TextBox Text="{Binding NewPropertyNo, Mode=TwoWay}" Margin="0,2" Padding="5"/>
+            <TextBlock Text="ID:" Grid.Row="0" VerticalAlignment="Top" Margin="0,5"/>
+            <TextBlock Text="Article Name:" Grid.Row="1" VerticalAlignment="Top" Margin="0,5"/>
+            <TextBlock Text="Description:" Grid.Row="2" VerticalAlignment="Top" Margin="0,5"/>
+            <TextBlock Text="Old Property No:" Grid.Row="3" VerticalAlignment="Top" Margin="0,5"/>
+            <TextBlock Text="New Property No:" Grid.Row="4" VerticalAlignment="Top" Margin="0,5"/>
+            <TextBlock Text="Unit of Measurement:" Grid.Row="5" VerticalAlignment="Top" Margin="0,5"/>
+            <TextBlock Text="Unit Value:" Grid.Row="6" VerticalAlignment="Top" Margin="0,5"/>
+            <TextBlock Text="Qty/Property Card:" Grid.Row="7" VerticalAlignment="Top" Margin="0,5"/>
+            <TextBlock Text="Qty/Physical Count:" Grid.Row="8" VerticalAlignment="Top" Margin="0,5"/>
+            <TextBlock Text="Location:" Grid.Row="9" VerticalAlignment="Top" Margin="0,5"/>
+            <TextBlock Text="Condition:" Grid.Row="10" VerticalAlignment="Top" Margin="0,5"/>
+            <TextBlock Text="Remarks:" Grid.Row="11" VerticalAlignment="Top" Margin="0,5"/>
 
-                <ComboBox SelectedItem="{Binding UnitOfMeasurement, Mode=TwoWay}" Margin="0,2" Padding="5">
-                    <ComboBoxItem Content="Piece"/>
-                    <ComboBoxItem Content="Box"/>
-                    <ComboBoxItem Content="Kilogram"/>
-                </ComboBox>
+            <TextBox Text="{Binding Id, Mode=TwoWay}" IsReadOnly="True" Grid.Row="0" Margin="0,2" Padding="5" Grid.Column="1" VerticalAlignment="Top"/>
+            <TextBox Text="{Binding ArticleName, Mode=TwoWay}" Grid.Row="1" Margin="0,2" Padding="5" Grid.Column="1" VerticalAlignment="Top"/>
+            <TextBox Text="{Binding Description, Mode=TwoWay}" Grid.Row="2" Margin="0,2" Padding="5" Grid.Column="1" VerticalAlignment="Top"/>
+            <TextBox Text="{Binding OldPropertyNo, Mode=TwoWay}" Grid.Row="3" Margin="0,2" Padding="5" Grid.Column="1" VerticalAlignment="Top"/>
+            <TextBox Text="{Binding NewPropertyNo, Mode=TwoWay}" Grid.Row="4" Margin="0,2" Padding="5" Grid.Column="1" VerticalAlignment="Top"/>
 
-                <TextBox Text="{Binding UnitValue, Mode=TwoWay}" Margin="0,2" Padding="5"/>
-                <TextBox Text="{Binding QuantityPerPropertyCard, Mode=TwoWay}" Margin="0,2" Padding="5"/>
-                <TextBox Text="{Binding QuantityPerPhysicalCount, Mode=TwoWay}" Margin="0,2" Padding="5"/>
-                <TextBox Text="{Binding Location, Mode=TwoWay}" Margin="0,2" Padding="5"/>
+            <ComboBox SelectedItem="{Binding UnitOfMeasurement, Mode=TwoWay}" Grid.Row="5" Margin="0,2" Padding="5" Grid.Column="1" VerticalAlignment="Top">
+                <ComboBoxItem Content="Piece"/>
+                <ComboBoxItem Content="Box"/>
+                <ComboBoxItem Content="Kilogram"/>
+            </ComboBox>
 
-                <ComboBox SelectedItem="{Binding Condition, Mode=TwoWay}" Margin="0,2" Padding="5">
-                    <ComboBoxItem Content="New"/>
-                    <ComboBoxItem Content="Used"/>
-                    <ComboBoxItem Content="Damaged"/>
-                </ComboBox>
+            <TextBox VerticalAlignment="Top" Text="{Binding UnitValue, Mode=TwoWay}" Grid.Row="6" Margin="0,2" Padding="5" Grid.Column="1"/>
+            <TextBox VerticalAlignment="Top" Text="{Binding QuantityPerPropertyCard, Mode=TwoWay}" Grid.Row="7" Margin="0,2" Padding="5" Grid.Column="1"/>
+            <TextBox VerticalAlignment="Top" Text="{Binding QuantityPerPhysicalCount, Mode=TwoWay}" Grid.Row="8" Margin="0,2" Padding="5" Grid.Column="1"/>
+            <TextBox VerticalAlignment="Top" Text="{Binding Location, Mode=TwoWay}" Grid.Row="9" Margin="0,2" Padding="5" Grid.Column="1"/>
 
-                <TextBox Text="{Binding Remarks, Mode=TwoWay}" Margin="0,2" Padding="5"/>
-            </StackPanel>
+            <ComboBox VerticalAlignment="Top" 
+                      ItemsSource="{Binding Conditions}"
+                      SelectedItem="{Binding Condition}" Grid.Row="10" Margin="0,2" Padding="5" Grid.Column="1"/>
+
+
+            <TextBox VerticalAlignment="Top" Text="{Binding Remarks, Mode=TwoWay}" Grid.Row="11" Margin="0,2" Padding="5" Grid.Column="1"/>
         </Grid>
 
         <!-- Save Button -->
         <Button Grid.Row="2" 
-                Content="Save" 
-                Command="{Binding SaveCommand}" 
-                HorizontalAlignment="Right" 
-                Padding="10,5" 
-                Margin="10"/>
+            Content="Save" 
+            Command="{Binding SaveCommand}" 
+            HorizontalAlignment="Right" 
+            Padding="10,5" 
+            Margin="10"/>
 
         <!-- Close Button -->
         <Button Grid.Row="2" 
-                Content="Close" 
-                Command="{Binding CloseCommand}" 
-                HorizontalAlignment="Left" 
-                Padding="10,5" 
-                Margin="10"/>
+            Content="Close" 
+            Command="{Binding CloseCommand}" 
+            HorizontalAlignment="Left" 
+            Padding="10,5" 
+            Margin="10"/>
     </Grid>
 </UserControl>
